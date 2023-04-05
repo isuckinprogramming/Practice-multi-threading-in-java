@@ -32,7 +32,7 @@ public class MainMethodRunner {
      * is dedicated to hold the implementation details of the
      * test.
      * <br><br>
-     * The only code insdide the main method are function
+     * The only code inside the main method are function
      * calls to the dedicated methods with the test.
      * */
     protected static void main(String[] args) {
@@ -55,10 +55,26 @@ public class MainMethodRunner {
      * */
     protected void tryingOutHowSynchronizationWorksWithNoIdea() {
 
-        ActionToRun ActionObj = new ActionToRun();
+//        my mistake here, makes for poor readability. Too much extraction.
+//        ActionToRun ActionObj = new ActionToRun();
 
-        Thread testThreadOne = new Thread(ActionObj, " 1");
-        Thread testThreadTwo = new Thread(ActionObj, "2");
+        Runnable actionToRun = () -> {
+
+            String threadDetails = "from Thread # " + Thread.currentThread().getName();
+            SychronizedExampleOne refToTestObject = MainMethodRunner.testObject;
+
+            System.out.println(
+                    threadDetails + " : " + MainMethodRunner.testObject.getTestObject()
+            );
+
+            String changeFromThreadTwo = "This is from thread two.";
+            refToTestObject.setTestObjectWithSychronizedBlock(changeFromThreadTwo);
+
+            System.out.println(threadDetails + refToTestObject.getTestObject());
+        };
+
+        Thread testThreadOne = new Thread( actionToRun , " 1");
+        Thread testThreadTwo = new Thread( actionToRun , "2");
 
 
         testThreadOne.start();

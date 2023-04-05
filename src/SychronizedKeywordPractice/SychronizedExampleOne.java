@@ -1,28 +1,21 @@
 package SychronizedKeywordPractice;
 
-
-class ActionToRun implements Runnable{
-    @Override
-    public void run() {
-
-
-        String threadDetails = "from Thread # " + Thread.currentThread().getName();
-        SychronizedExampleOne refToTestObject = MainMethodRunner.testObject;
-
-        System.out.println(
-            threadDetails + " : " + MainMethodRunner.testObject.getTestObject()
-        );
-
-
-        String changeFromThreadTwo = "This is from thread two.";
-        refToTestObject.setTestObjectWithSychronizedBlock( changeFromThreadTwo );
-
-        System.out.println( threadDetails + refToTestObject.getTestObject());
-    }
-}
-
-
-
+/**
+ *
+ * I just wrote this today, I forgot already what it is meant to do.
+ * <br><br>
+ * My naming sucks.
+ * <br><br>
+ * I still cannot understand why I made this class.
+ * <br><br>
+ * I remember trying out synchronized blocks and synchronized keywords
+ * on functions. I mean they both work the same way, they prevent other
+ * threads from accessing the code if there is a thread in current access
+ * to the code.
+ * <br><br>
+ * Works like an auto-lock that prevents others from accessing something.
+ *
+ * */
 public class SychronizedExampleOne {
     protected String testObject = null;
     protected synchronized void setTestObjectWithSynchronizedFunction( String newObject ){
